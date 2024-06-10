@@ -2,7 +2,7 @@
 
 This repo should help get you started developing with Weaviate and React.
 
-![Weaviate]()
+![Weaviate](/public/cover.png)
 
 ## Installation 
 
