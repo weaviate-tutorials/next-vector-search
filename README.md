@@ -19,8 +19,8 @@ This repo should help get you started developing with Weaviate and React.
 
 4. Create a `.env` file and add the following keys
     - your Open AI API key as `OPENAI_KEY` (you can get this in your [Open AI settings](https://platform.openai.com/account/api-keys))
-    - your Weaviate API key as `VITE_WEAVIATE_API_KEY` (you can get this in your [Weaviate dashboard](https://console.weaviate.cloud/dashboard) under sandbox details)
-    - your Weaviate host URL as `VITE_WEAVIATE_HOST_URL` (you can get this in your [Weaviate dashboard](https://console.weaviate.cloud/dashboard) under sandbox details)
+    - your Weaviate API key as `WEAVIATE_API_KEY` (you can get this in your [Weaviate dashboard](https://console.weaviate.cloud/dashboard) under sandbox details)
+    - your Weaviate host URL as `WEAVIATE_HOST_URL` (you can get this in your [Weaviate dashboard](https://console.weaviate.cloud/dashboard) under sandbox details)
   
 5. Import your data and initialize your collections with the following command
    ```
