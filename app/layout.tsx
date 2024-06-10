@@ -14,8 +14,8 @@ const noto_serif = Noto_Serif({
 });
 
 export const metadata: Metadata = {
-  title: "Weaviate Quote Finder",
-  description: "Find a quote that supports your argument",
+  title: "Weaviate Vector Search",
+  description: "Vector Search with Weaviate",
 };
 
 export default function RootLayout({

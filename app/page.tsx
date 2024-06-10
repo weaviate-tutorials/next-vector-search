@@ -1,9 +1,6 @@
 import Search from "../components/Search.tsx";
 import React from 'react';
 import Image from "next/image";
-import { vectorSearch } from "../utils/actions.ts";
-// import Link from "next/link";
-// import { parse } from "path";
 
 export default async function Home({
   params,

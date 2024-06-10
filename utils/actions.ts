@@ -5,8 +5,8 @@ import { TrackType } from "../types.ts";
 
 
 export async function vectorSearch(searchTerm: string) {
-  const client = await weaviate.connectToWeaviateCloud(process.env.WCS_URL!!, {
-    authCredentials: new weaviate.ApiKey(process.env.WCS_API_KEY!!),
+  const client = await weaviate.connectToWeaviateCloud(process.env.WEAVIATE_HOST_URL!!, {
+    authCredentials: new weaviate.ApiKey(process.env.WEAVIATE_API_KEY!!),
     headers: {
       "X-OpenAI-Api-Key": process.env.OPENAI_APIKEY!!,
     },
