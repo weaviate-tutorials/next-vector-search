@@ -1,4 +1,4 @@
-import { type WeaviateGenericObject } from "weaviate-client"
+import { GenerativeReturn, type WeaviateGenericObject } from "weaviate-client"
 
 export type TrackType =  {
     title: string,
@@ -7,5 +7,10 @@ export type TrackType =  {
     year: number,
     rank: number
   };
+
+
+export type SearchRes = {
+  response : GenerativeReturn<TrackType>
+}
 
   

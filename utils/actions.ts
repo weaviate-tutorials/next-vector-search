@@ -1,22 +1,50 @@
 "use server";
 
-import weaviate from "weaviate-client";
+import weaviate, { WeaviateClient } from "weaviate-client";
 import { TrackType } from "../types.ts";
+
+let client: WeaviateClient = null;
+
+async function initClient() {
+  if (!client) {
+    client = await weaviate.connectToWeaviateCloud(process.env.WEAVIATE_HOST_URL!!, {
+      authCredentials: new weaviate.ApiKey(process.env.WEAVIATE_API_KEY!!),
+      headers: {
+        "X-Cohere-Api-Key": process.env.COHERE_KEY!!,
+        "X-OpenAI-Api-Key": process.env.OPENAI_APIKEY!!,
+      },
+    });
+  }
+  console.log('client',client)
+  return client
+}
 
 
 export async function vectorSearch(searchTerm: string) {
-  const client = await weaviate.connectToWeaviateCloud(process.env.WEAVIATE_HOST_URL!!, {
-    authCredentials: new weaviate.ApiKey(process.env.WEAVIATE_API_KEY!!),
-    headers: {
-      "X-OpenAI-Api-Key": process.env.OPENAI_APIKEY!!,
-    },
-  });
-    
-    const myCollection = client.collections.get<TrackType>('CalvinHarris')
+  client = await initClient()
 
-    const response = await myCollection.query.nearText(searchTerm,{
-        limit: 5
-    })
+  const myCollection = client.collections.get<TrackType>('Wikipedia')
 
-    return response
-  }
+  const response = await myCollection.query.nearText(searchTerm, {
+    limit: 5
+  })
+  console.log('vs',response)
+
+  return response
+}
+
+export async function RAG(searchTerm: string) {
+  const client = await initClient()
+
+  const myCollection = client.collections.get<TrackType>('Wikipedia')
+
+  const response = await myCollection.generate.nearText(searchTerm,{
+    groupedTask: `you are a middle school teacher, use the information below to answer ${searchTerm} and use 
+  simple words`
+  }, {
+    limit: 5
+  })
+  console.log('rag',response)
+
+  return response
+}
