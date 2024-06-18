@@ -84,13 +84,13 @@ export default function RAGResult() {
                                 className="flex z-10 mt-2 w-[750px] divide-gray-100 rounded-md border border-gray-100 bg-slate-200 shadow-s"
                                 role="menu">
                                 <div className="p-2">
-                                    <p className="pt-2 font-bold">ℹ️ Sources</p>
+                                    <p className="pt-2 font-bold">ℹ️ Sources (Results from Vector Search)</p>
                                     <p className="pb-2"> Find out what powered the response from your LLM</p>
                                     {
                                         trackResponse.objects.map((result) => (
                                             <ol >
                                                 <li className="space-y-4">
-                                                    <a className="underline" href="result.properties.url"> {result.properties.title} </a>
+                                                    <a className="underline" href="result.properties.url" target="_blank"> {result.properties.title} </a>
                                                 </li>
                                             </ol>
                                         ))
