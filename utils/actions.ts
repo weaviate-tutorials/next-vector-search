@@ -1,9 +1,9 @@
 "use server";
 
 import weaviate, { WeaviateClient } from "weaviate-client";
-import { TrackType } from "../types.ts";
+import { Wiki } from "../types.ts"; 
 
-let client: WeaviateClient = null;
+let client: WeaviateClient | null = null;
 
 async function initClient() {
   if (!client) {
@@ -15,7 +15,6 @@ async function initClient() {
       },
     });
   }
-  console.log('client',client)
   return client
 }
 
@@ -23,28 +22,26 @@ async function initClient() {
 export async function vectorSearch(searchTerm: string) {
   client = await initClient()
 
-  const myCollection = client.collections.get<TrackType>('Wikipedia')
+  const myCollection = client.collections.get('Wikipedia')
 
-  const response = await myCollection.query.nearText(searchTerm, {
-    limit: 5
-  })
-  console.log('vs',response)
+  const response = await myCollection.generate.nearText(searchTerm, {
+    singlePrompt: `please translate {title} to french`
+  },{ limit: 5 })
 
   return response
+
 }
 
 export async function RAG(searchTerm: string) {
-  const client = await initClient()
+  client = await initClient()
 
-  const myCollection = client.collections.get<TrackType>('Wikipedia')
+  const myCollection = client.collections.get('Wikipedia')
 
-  const response = await myCollection.generate.nearText(searchTerm,{
-    groupedTask: `you are a middle school teacher, use the information below to answer ${searchTerm} and use 
-  simple words`
-  }, {
-    limit: 5
-  })
-  console.log('rag',response)
+  const response = await myCollection.generate.nearText(searchTerm, {
+    groupedTask: `write a haiku about these items in japanese`,
+  },{ limit: 5 })
 
   return response
+
 }
+

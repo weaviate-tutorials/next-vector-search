@@ -24,7 +24,7 @@ export default async function Home({
           />
         </div>
         <h1 className="text-4xl pt-5 font-bold text-black text-center">
-          Vector Search with Weaviate
+        Semantic Search with Weaviate
         </h1>
 
         <div className="items-center pb-6 pt-10 p-8">

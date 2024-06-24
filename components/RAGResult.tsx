@@ -4,8 +4,7 @@ import { RAG } from "../utils/actions.ts";
 import { useState, useTransition } from "react";
 import React from "react";
 import { GenerativeReturn, WeaviateReturn } from "weaviate-client";
-import { TrackType } from "../types.ts";
-import { createRoot } from 'react-dom/client'
+import { Wiki } from "../types.ts";
 import Markdown from 'react-markdown'
 
 export default function RAGResult() {
@@ -13,7 +12,7 @@ export default function RAGResult() {
     const [search, setSearch] = useState(false);
     const [loading, setLoading] = useState(false);
     const [trackResponse, setTrackResponse] = useState<
-        GenerativeReturn<TrackType>
+        GenerativeReturn<Wiki>
     >(undefined);
 
     const [isPending, startTransition] = useTransition();
@@ -90,7 +89,7 @@ export default function RAGResult() {
                                         trackResponse.objects.map((result) => (
                                             <ol >
                                                 <li className="space-y-4">
-                                                    <a className="underline" href="result.properties.url" target="_blank"> {result.properties.title} </a>
+                                                    <a className="underline" href="result.properties.url" target="_blank"> {result.properties.title} | {result?.generated} </a>
                                                 </li>
                                             </ol>
                                         ))

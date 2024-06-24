@@ -4,14 +4,14 @@ import { vectorSearch } from "../utils/actions.ts";
 import { useState, useTransition } from "react";
 import React from "react";
 import { WeaviateReturn } from "weaviate-client";
-import { TrackType } from "../types.ts";
+import { Wiki } from "../types.ts";
 
 export default function Search() {
     const [searchTerm, setSearchTerm] = useState("");
     const [search, setSearch] = useState(false);
     const [loading, setLoading] = useState(false);
     const [trackResponse, setTrackResponse] = useState<
-        WeaviateReturn<TrackType>
+        WeaviateReturn<Wiki>
     >(undefined);
 
     const [isPending, startTransition] = useTransition();
@@ -21,9 +21,7 @@ export default function Search() {
         setLoading(true)
         if (searchTerm.length > 0) {
             startTransition(async () => {
-                const trackResponse = await vectorSearch(
-                    searchTerm,
-                );
+                const trackResponse = await vectorSearch(searchTerm);
                 setTrackResponse(trackResponse);
                 setSearch(true)
                 setLoading(false)
@@ -73,15 +71,12 @@ export default function Search() {
                                 {
                                     trackResponse.objects.map((result) => (
                                         <div key={result.uuid} className="space-y-4">
-                                            <details className="group [&_summary::-webkit-details-marker]:hidden" open>
-                                                <summary
-                                                    className="flex cursor-pointer items-center justify-between gap-1.5 rounded-lg text-sm p-4 text-gray-900">
-                                                    <h2 className="font-medium">
-                                                        {result.properties.title} by {result.properties.artist}
-                                                    </h2>
-
-                                                </summary>
-                                            </details>
+                                            <a className="font-medium pt-4 underline" href={result.properties.url}>
+                                                {result.properties.title} | { result.generated }
+                                            </a>
+                                            <h1 className="-translate-y-2 w-full">
+                                                {result.properties.text}
+                                            </h1>
                                         </div>
                                     ))
                                 }

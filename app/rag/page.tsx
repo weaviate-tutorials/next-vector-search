@@ -1,4 +1,4 @@
-import Search from "../../components/Search";
+import Search from "../../components/Search.tsx";
 import React from 'react';
 import Image from "next/image";
 import RAGResult from "../../components/RAGResult.tsx";
