@@ -8,10 +8,10 @@ let client: WeaviateClient | null = null;
 async function initClient() {
   if (!client) {
     client = await weaviate.connectToWeaviateCloud(process.env.WEAVIATE_HOST_URL!!, {
-      authCredentials: new weaviate.ApiKey(process.env.WEAVIATE_API_KEY!!),
+      authCredentials: new weaviate.ApiKey(process.env.WEAVIATE_ADMIN_KEY!!),
       headers: {
-        "X-Cohere-Api-Key": process.env.COHERE_KEY!!,
-        "X-OpenAI-Api-Key": process.env.OPENAI_APIKEY!!,
+        "X-Cohere-Api-Key": process.env.COHERE_API_KEY!!,
+        "X-OpenAI-Api-Key": process.env.OPENAI_API_KEY!!,
       },
     });
   }
