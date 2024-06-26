@@ -19,6 +19,7 @@ This repo should help get you started developing with Weaviate and React.
 
 4. Create a `.env` file and add the following keys
     - your Open AI API key as `OPENAI_API_KEY` (you can get this in your [Open AI settings](https://platform.openai.com/account/api-keys))
+    - your Cohere API key as `NUXT_COHERE_API_KEY` (you can get this in your [Cohere settings](https://dashboard.cohere.com/api-keys))
     - your Weaviate API key as `WEAVIATE_ADMIN_KEY` (you can get this in your [Weaviate dashboard](https://console.weaviate.cloud/dashboard) under sandbox details)
     - your Weaviate host URL as `WEAVIATE_HOST_URL` (you can get this in your [Weaviate dashboard](https://console.weaviate.cloud/dashboard) under sandbox details)
   
