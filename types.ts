@@ -1,4 +1,4 @@
-import { GenerativeReturn, type WeaviateGenericObject } from "weaviate-client"
+import { GenerativeReturn } from "weaviate-client"
 
 export type Wiki = {
   title: string,
@@ -7,8 +7,6 @@ export type Wiki = {
 }
 
 
-export type SearchRes = {
-  response : GenerativeReturn<Wiki>
+export type SearchResponse = {
+  response?: GenerativeReturn<Wiki>
 }
-
-  

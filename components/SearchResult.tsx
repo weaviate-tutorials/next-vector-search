@@ -1,25 +1,23 @@
 "use client";
 
-import { RAG } from "../utils/actions.ts";
+import { vectorSearch } from "../utils/actions.ts";
+import Loading from "@/components/Loading.tsx"
 import { useState, useTransition } from "react";
 import React from "react";
-import { GenerativeReturn } from "weaviate-client";
+import { WeaviateReturn } from "weaviate-client";
 import { Wiki } from "../types.ts";
-import References from "./References.tsx";
-import GenResult from "../components/GenResult.tsx";
-import Loading from "../components/Loading.tsx";
-import Grid from "../components/Grid.tsx";
-import Cover from "../components/Cover.tsx";
-import InputCover from "./InputCover.tsx";
 import Container from "./Container.tsx";
+import Cover from "./Cover.tsx";
+import InputCover from "./InputCover.tsx";
+import VectorSearchResult from "./VectorSearchResult.tsx";
 
 
-export default function RAGResult() {
+export default function SearchResult() {
     const [searchTerm, setSearchTerm] = useState("");
     const [search, setSearch] = useState(false);
     const [loading, setLoading] = useState(false);
     const [searchResponse, setSearchResponse] = useState<
-        GenerativeReturn<Wiki> | null
+        WeaviateReturn<Wiki> | null
     >(null);
 
     const [isPending, startTransition] = useTransition();
@@ -29,7 +27,7 @@ export default function RAGResult() {
         setLoading(true)
         if (searchTerm.length > 0) {
             startTransition(async () => {
-                const searchResponse = await RAG(
+                const searchResponse = await vectorSearch(
                     searchTerm,
                 );
                 setSearchResponse(searchResponse);
@@ -41,17 +39,15 @@ export default function RAGResult() {
 
     return (
         <Container>
-            <InputCover> 
-                <input type="text"
-                    id="SearchTerm"
-                    placeholder="what are you looking for?"
+            <InputCover>
+                <input type="text" id="SearchTerm" placeholder="what are you looking for?"
                     value={searchTerm}
                     onChange={(e) => {
                         setSearchTerm(e.currentTarget.value)
                     }}
                     className="input-main" />
             </InputCover>
-            <Cover> 
+            <Cover>
                 <button
                     className="btn-primary"
                     onClick={(e) => {
@@ -62,16 +58,11 @@ export default function RAGResult() {
                 </button>
             </Cover>
             {search && searchResponse &&
-                <div>
-                    <Grid>
-                        <GenResult response={searchResponse} />
-                        <References response={searchResponse} />
-                    </Grid>
-                </div>
-
+               <VectorSearchResult response={searchResponse} />
             }
             {loading &&
-                <Loading />}
+                <Loading />
+                }
         </Container>
     )
 }
