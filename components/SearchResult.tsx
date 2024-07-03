@@ -11,7 +11,6 @@ import Cover from "./Cover.tsx";
 import InputCover from "./InputCover.tsx";
 import VectorSearchResult from "./VectorSearchResult.tsx";
 
-
 export default function SearchResult() {
     const [searchTerm, setSearchTerm] = useState("");
     const [search, setSearch] = useState(false);

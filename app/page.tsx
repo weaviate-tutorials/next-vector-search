@@ -4,7 +4,6 @@ import Image from "next/image";
 import SearchResult from "../components/SearchResult.tsx";
 import Header from "../components/Header.tsx";
 
-
 export default async function Home() {
 
   return (

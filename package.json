@@ -7,12 +7,12 @@
     "start": "next start"
   },
   "dependencies": {
+    "dotenv": "^16.4.5",
     "next": "latest",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-markdown": "^9.0.1",
-    "weaviate-client": "^3.0.3",
-    "weaviate-ts-embedded": "^1.2.0"
+    "weaviate-client": "^3.0.3"
   },
   "engines": {
     "node": ">=18"
