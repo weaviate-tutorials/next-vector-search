@@ -4,7 +4,8 @@
   "scripts": {
     "build": "next build",
     "dev": "next dev -p 3004",
-    "start": "next start"
+    "start": "next start",
+    "import-data": "npx tsx utils/import.ts"
   },
   "dependencies": {
     "dotenv": "^16.4.5",
@@ -12,6 +13,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-markdown": "^9.0.1",
+    "tsx": "^4.16.2",
     "weaviate-client": "^3.0.3"
   },
   "engines": {
