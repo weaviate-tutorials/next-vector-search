@@ -27,7 +27,7 @@ This repo should help get you started developing with Weaviate and React.
    ```
    yarn run import
    ``` 
-5. Start your Vue.js app with the following command
+5. Start your app with the following command
     ```
     yarn dev
     ```
