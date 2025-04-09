@@ -10,13 +10,13 @@ let client: WeaviateClient | null = null;
 
 async function initClient() {
   if (!client) {
-    client = await weaviate.connectToWeaviateCloud(process.env.WEAVIATE_HOST_URL!!, {
-      authCredentials: new weaviate.ApiKey(process.env.WEAVIATE_ADMIN_KEY!!),
+    client = await weaviate.connectToLocal({
+      authCredentials: new weaviate.ApiKey('YOUR-WEAVIATE-API-KEY'),
       headers: {
         "X-Cohere-Api-Key": process.env.COHERE_API_KEY!!,
         "X-OpenAI-Api-Key": process.env.OPENAI_API_KEY!!,
       },
-    });
+  });
   }
 
   const ready = await client.isReady()
@@ -47,7 +47,7 @@ async function importData(fileName: string, collectionName: string) {
     const filePath = join(process.cwd(), `./utils/${fileName}`)
     const file = readline.createInterface({ input: fs.createReadStream(filePath), output: process.stdout, terminal: false });
 
-    const wiki = client.collections.get(collectionName)
+    const wiki = client.collections.use(collectionName)
     let itemsToInsert = []
     let counter = 0;
 
